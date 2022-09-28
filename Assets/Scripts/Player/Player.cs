@@ -19,6 +19,9 @@ using UnityEngine.Rendering;
 [RequireComponent(typeof(Rigidbody2D))]
 [RequireComponent(typeof(IdleEvent))]
 [RequireComponent(typeof(Idle))]
+[RequireComponent(typeof(AimWeapon))]
+[RequireComponent(typeof(AimWeaponEvent))]
+[RequireComponent(typeof(Idle))]
 [DisallowMultipleComponent]
 #endregion REQUIRE COMPONENTS
 
@@ -34,6 +37,7 @@ public class Player : MonoBehaviour
     [HideInInspector] public IdleEvent idleEvent;
     [HideInInspector] public SpriteRenderer spriteRenderer;
     [HideInInspector] public Animator animator;
+    [HideInInspector] public AimWeaponEvent aimWeaponEvent;
 
     private void Awake()
     {
@@ -45,6 +49,7 @@ public class Player : MonoBehaviour
         idleEvent = GetComponent<IdleEvent>();
         spriteRenderer = GetComponent<SpriteRenderer>();
         animator = GetComponent<Animator>();
+        aimWeaponEvent = GetComponent<AimWeaponEvent>();
     }
 
 
