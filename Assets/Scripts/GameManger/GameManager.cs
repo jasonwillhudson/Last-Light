@@ -28,7 +28,41 @@ public class GameManager : SingletonMonobehaviour<GameManager>
 
     [SerializeField] private int currentDungeonLevelListIndex = 0;
 
+    private Room currentRoom;
+    private Room previousRoom;
+    private PlayerDetail playerDetails;
+    private Player player;
+
     [HideInInspector] public GameState gameState;
+
+
+    protected override void Awake()
+    {
+        // Call base class
+        base.Awake();
+
+        // Set player details - saved in current player scriptable object from the main menu
+        playerDetails = GameResources.Instance.currentPlayer.playerDetail;
+
+        // Instantiate player
+        InstantiatePlayer();
+
+    }
+
+
+    /// Create player in scene at position
+    private void InstantiatePlayer()
+    {
+        // Instantiate player
+        GameObject playerGameObject = Instantiate(playerDetails.playerPrefab);
+
+        // Initialize Player
+        player = playerGameObject.GetComponent<Player>();
+
+        player.Initialize(playerDetails);
+
+    }
+
 
 
     // Start is called before the first frame update
@@ -70,6 +104,18 @@ public class GameManager : SingletonMonobehaviour<GameManager>
         }
 
     }
+    /// <summary>
+    /// Set the current room the player in in
+    /// </summary>
+    public void SetCurrentRoom(Room room)
+    {
+        previousRoom = currentRoom;
+        currentRoom = room;
+
+        //// Debug
+        //Debug.Log(room.prefab.name.ToString());
+    }
+
 
 
     private void PlayDungeonLevel(int dungeonLevelListIndex)
@@ -83,6 +129,31 @@ public class GameManager : SingletonMonobehaviour<GameManager>
         }
 
 
+        // Set player roughly mid-room
+        player.gameObject.transform.position = new Vector3((currentRoom.lowerBounds.x + currentRoom.upperBounds.x) / 2f, (currentRoom.lowerBounds.y + currentRoom.upperBounds.y) / 2f, 0f);
+
+        // Get nearest spawn point in room nearest to player
+        player.gameObject.transform.position = HelperUtilities.GetSpawnPositionNearestToPlayer(player.gameObject.transform.position);
+
+
+    }
+
+
+    /// <summary>
+    /// Get the player
+    /// </summary>
+    public Player GetPlayer()
+    {
+        return player;
+    }
+
+
+    /// <summary>
+    /// Get the current room the player is in
+    /// </summary>
+    public Room GetCurrentRoom()
+    {
+        return currentRoom;
     }
 
 

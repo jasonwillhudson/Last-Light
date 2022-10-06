@@ -8,7 +8,13 @@ public class PlayerDetail : ScriptableObject
 {
 
     public string playerCharacterName;
+
+    #region Tooltip
+    [Tooltip("Prefab gameobject for the player")]
+    #endregion
     public GameObject playerPrefab;
+
+
     public RuntimeAnimatorController runtimeAnimatorController;
     public int playerHealthAmount;
     public bool isImmuneAfterHit = false;
