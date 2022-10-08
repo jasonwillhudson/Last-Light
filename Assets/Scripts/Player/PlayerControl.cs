@@ -19,9 +19,11 @@ public class PlayerControl : MonoBehaviour
     [SerializeField] private Transform weaponShootPosition;
     private Player player;
     private float moveSpeed;
+    private float attackTimer = 0f;
 
 
     private bool isPlayerMovementDisabled = false;
+    private bool isRotaionDisabled = false;
 
     [HideInInspector] public bool isPlayerRolling = false;
 
@@ -35,8 +37,6 @@ public class PlayerControl : MonoBehaviour
 
     private void Start()
     {
-
-
 
         // Set player animation speed
         SetPlayerAnimationSpeed();
@@ -63,11 +63,39 @@ public class PlayerControl : MonoBehaviour
         // Process the player movement input
         MovementInput();
 
+        //player attack input
+        PlayerAttackInput();
+        Debug.Log("isRotation DIsabled?" + isRotaionDisabled);
+        //if weapon rotation is disabled then return
+        if (isRotaionDisabled) return;
         WeaponInput();
 
 
     }
 
+    //player attack input
+    private void PlayerAttackInput()
+    {
+        if (attackTimer > 0)
+        {
+            attackTimer -= Time.deltaTime;
+            isRotaionDisabled = true; //weapon not allow to rotate with mouse when attacking
+             
+        }
+        else
+        {
+            isRotaionDisabled = false;
+            player.playerAttackEvent.CallPlayerAttackEvent("attack_1", false);//call the attack event
+
+            if (Input.GetMouseButtonDown(0))
+            {
+                player.playerAttackEvent.CallPlayerAttackEvent("attack_1", true);//call the attack event
+                Debug.Log("Attack");
+                attackTimer = 0.3f;
+            }
+        }
+        
+    }
 
     /// Player movement input
 

@@ -29,6 +29,8 @@ public class AnimatePlayer : MonoBehaviour
         //Subscript to aim weapon
         player.aimWeaponEvent.OnWeaponAim += AimWeaponEvent_OnWeaponAim;
 
+        player.playerAttackEvent.OnPlayerAttack += playerAttackEvent_OnPlayerAttack;
+
     }
 
     private void OnDisable()
@@ -45,19 +47,17 @@ public class AnimatePlayer : MonoBehaviour
         //unsbscribe
         player.aimWeaponEvent.OnWeaponAim -= AimWeaponEvent_OnWeaponAim;
 
+        player.playerAttackEvent.OnPlayerAttack -= playerAttackEvent_OnPlayerAttack;
+
     }
 
-    private void InitializeAimAnimationParameters()
+
+    private void playerAttackEvent_OnPlayerAttack(PlayerAttackEvent playerAttackEvent, PlayerAttackArgs playerAttackArgs)
     {
-
-
-        player.animator.SetBool(Settings.aimUp, false);
-        player.animator.SetBool(Settings.aimUpRight, false);
-        player.animator.SetBool(Settings.aimUpLeft, false);
-        player.animator.SetBool(Settings.aimRight, false);
-        player.animator.SetBool(Settings.aimLeft, false);
-        player.animator.SetBool(Settings.aimDown, false);
+        if(playerAttackArgs.isAttacking) player.animator.SetTrigger("isAttacking");
+        else player.animator.ResetTrigger(Settings.isAttacking);
     }
+
 
     /// <summary>
     /// On movement by velocity event handler
@@ -68,8 +68,7 @@ public class AnimatePlayer : MonoBehaviour
         SetMovementAnimationParameters();
         
     }
-
-    private void AimWeaponEvent_OnWeaponAim(AimWeaponEvent aimWeaponEvent, AimWeaponEventArgs aimWeaponEventArgs)
+   private void AimWeaponEvent_OnWeaponAim(AimWeaponEvent aimWeaponEvent, AimWeaponEventArgs aimWeaponEventArgs)
     {
         InitializeAimAnimationParameters();
 
@@ -113,6 +112,21 @@ public class AnimatePlayer : MonoBehaviour
         SetIdleAnimationParameters();
     }
 
+    private void InitializeAimAnimationParameters()
+    {
+
+
+        player.animator.SetBool(Settings.aimUp, false);
+        player.animator.SetBool(Settings.aimUpRight, false);
+        player.animator.SetBool(Settings.aimUpLeft, false);
+        player.animator.SetBool(Settings.aimRight, false);
+        player.animator.SetBool(Settings.aimLeft, false);
+        player.animator.SetBool(Settings.aimDown, false);
+    }
+
+
+
+ 
 
 
     /// <summary>

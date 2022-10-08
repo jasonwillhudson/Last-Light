@@ -38,7 +38,7 @@ public class Player : MonoBehaviour
     [HideInInspector] public SpriteRenderer spriteRenderer;
     [HideInInspector] public Animator animator;
     [HideInInspector] public AimWeaponEvent aimWeaponEvent;
-
+    public PlayerAttackEvent playerAttackEvent;
     private void Awake()
     {
         Debug.Log("Player Loading ...");
@@ -51,6 +51,9 @@ public class Player : MonoBehaviour
         spriteRenderer = GetComponent<SpriteRenderer>();
         animator = GetComponent<Animator>();
         aimWeaponEvent = GetComponent<AimWeaponEvent>();
+
+        //Load Player Attack
+        playerAttackEvent = GetComponent<PlayerAttackEvent>();
     }
 
 
