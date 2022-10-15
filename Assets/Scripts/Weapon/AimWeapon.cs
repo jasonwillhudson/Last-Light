@@ -53,14 +53,14 @@ public class AimWeapon : MonoBehaviour
         {
             case AimDirection.Left:
             case AimDirection.UpLeft:
-                weaponRotationPointTransform.localScale = new Vector3(1f, -1f, 0f);
+                //weaponRotationPointTransform.localScale = new Vector3(1f, -1f, 0f);
                 break;
 
             case AimDirection.Up:
             case AimDirection.UpRight:
             case AimDirection.Right:
             case AimDirection.Down:
-               weaponRotationPointTransform.localScale = new Vector3(1f, 1f, 0f);
+               //weaponRotationPointTransform.localScale = new Vector3(1f, 1f, 0f);
                 break;
         }
 
