@@ -239,9 +239,15 @@ Camera:
   m_NormalizedViewPortRect:
     serializedVersion: 2
     x: 0
+<<<<<<< Updated upstream
     y: 0.121348314
     width: 1
     height: 0.75842696
+=======
+    y: 0
+    width: 1
+    height: 1
+>>>>>>> Stashed changes
   near clip plane: 0.3
   far clip plane: 1000
   field of view: 60
@@ -310,6 +316,7 @@ GameObject:
   m_Component:
   - component: {fileID: 135802246}
   - component: {fileID: 135802245}
+  - component: {fileID: 135802247}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -330,10 +337,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dungeonLevelList:
-  - {fileID: 11400000, guid: bf3a46dfeff4b5b4db0fed40bd8b1697, type: 2}
   - {fileID: 11400000, guid: 51f0225f90b8a9d469c0167bb3a8fdc7, type: 2}
   - {fileID: 11400000, guid: 468928d8bf3446b42a7535519115c7ef, type: 2}
-  currentDungeonLevelListIndex: 0
+  - {fileID: 11400000, guid: bf3a46dfeff4b5b4db0fed40bd8b1697, type: 2}
+  currentDungeonLevelListIndex: 1
   gameState: 0
 --- !u!4 &135802246
 Transform:
@@ -350,6 +357,19 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &135802247
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 135802244}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 603fcb590f381f44eb614b8cee1e9aa5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  roomTemplateSO: {fileID: 11400000, guid: 230185be96d7b914092070512659522f, type: 2}
 --- !u!1 &315100309
 GameObject:
   m_ObjectHideFlags: 0

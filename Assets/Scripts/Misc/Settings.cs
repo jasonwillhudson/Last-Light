@@ -4,16 +4,23 @@ using UnityEngine;
 
 public static class Settings
 {
+    #region UNITS
+    public const float pixelsPerUnit = 16f;
+    public const float tileSizePixels = 16f;
+    #endregion
+
     #region DUNGEON BUILD SETTINGS
     public const int maxDungeonRebuildAttemptsForRoomGraph = 1000;
     public const int maxDungeonBuildAttempts = 10;
     #endregion
 
     #region ROOM SETTINGS
+    public const float fadeInTime = 0.5f; // time to fade in the room
 
     public const int maxChildCorridors = 3; // Max number of child corridors leading from a room. - maximum should be 3 although this is not recommended since it can cause the dungeon building to fail since the rooms are more likely to not fit together;
 
     #endregion
+
 
     #region ANIMATOR PARAMETERS
     // Animator parameters - Player
@@ -36,5 +43,21 @@ public static class Settings
     public static int use = Animator.StringToHash("use");
     public static int isAttacking = Animator.StringToHash("isAttacking");
     public static float baseSpeedForPlayerAnimations = 8f;
+
+    // Animator parameters - Door
+    public static int open = Animator.StringToHash("open");
+    #endregion
+
+    #region GAMEOBJECT TAGS
+    public const string playerTag = "Player";
+    public const string playerWeapon = "playerWeapon";
+    #endregion
+
+
+    #region ASTAR PATHFINDING PARAMETERS
+    public const int defaultAStarMovementPenalty = 40;
+    public const int preferredPathAStarMovementPenalty = 1;
+    public const float playerMoveDistanceToRebuildPath = 3f;
+    public const float enemyPathRebuildCooldown = 2f;
     #endregion
 }
