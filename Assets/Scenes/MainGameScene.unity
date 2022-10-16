@@ -239,9 +239,9 @@ Camera:
   m_NormalizedViewPortRect:
     serializedVersion: 2
     x: 0
-    y: 0.121348314
+    y: 0
     width: 1
-    height: 0.75842696
+    height: 1
   near clip plane: 0.3
   far clip plane: 1000
   field of view: 60
@@ -310,6 +310,8 @@ GameObject:
   m_Component:
   - component: {fileID: 135802246}
   - component: {fileID: 135802245}
+  - component: {fileID: 135802247}
+  - component: {fileID: 135802248}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -335,6 +337,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 468928d8bf3446b42a7535519115c7ef, type: 2}
   currentDungeonLevelListIndex: 0
   gameState: 0
+  previousGameState: 0
 --- !u!4 &135802246
 Transform:
   m_ObjectHideFlags: 0
@@ -350,6 +353,31 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &135802247
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 135802244}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 603fcb590f381f44eb614b8cee1e9aa5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &135802248
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 135802244}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 79f2f59e0e78bb349a0ea19f7e573b19, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  roomTemplateSO: {fileID: 11400000, guid: 6744ab19da7482a498a77a8f8134b14d, type: 2}
 --- !u!1 &315100309
 GameObject:
   m_ObjectHideFlags: 0
@@ -460,6 +488,50 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0530112dbd918f74eaac22991c3f6851, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &904329367
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 904329369}
+  - component: {fileID: 904329368}
+  m_Layer: 0
+  m_Name: EnemySpawner
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &904329368
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 904329367}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2fba844b981ed3a45a3de700a63409f1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!4 &904329369
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 904329367}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 7
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1105995121
 GameObject:
   m_ObjectHideFlags: 0
@@ -470,6 +542,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1105995123}
   - component: {fileID: 1105995122}
+  - component: {fileID: 1105995124}
   m_Layer: 0
   m_Name: DungeonBuilder
   m_TagString: Untagged
@@ -504,6 +577,18 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1105995124
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1105995121}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ac6ce1d09a3acab40857d3baa4561a7b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1134836163
 GameObject:
   m_ObjectHideFlags: 0
@@ -662,7 +747,7 @@ MonoBehaviour:
     ModeOverride: 1
     LensShift: {x: 0, y: 0}
     GateFit: 2
-    m_SensorSize: {x: 1.7777778, y: 1}
+    m_SensorSize: {x: 1.7782341, y: 1}
   m_Transitions:
     m_BlendHint: 0
     m_InheritPosition: 0

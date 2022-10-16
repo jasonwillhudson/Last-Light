@@ -1,0 +1,17 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c757680ccc843c548923bf1940b0716c, type: 3}
+  m_Name: EnemyDetails_MudRock_Brown
+  m_EditorClassIdentifier: 
+  enemyName: MudRock Brown
+  enemyPrefab: {fileID: 5849896774138238004, guid: 9490a2f394cdbd843bce2dc722c60d8e, type: 3}
+  chaseDistance: 50

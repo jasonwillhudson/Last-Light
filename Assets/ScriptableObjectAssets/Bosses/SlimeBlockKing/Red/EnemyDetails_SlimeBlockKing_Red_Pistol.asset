@@ -1,0 +1,17 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c757680ccc843c548923bf1940b0716c, type: 3}
+  m_Name: EnemyDetails_SlimeBlockKing_Red_Pistol
+  m_EditorClassIdentifier: 
+  enemyName: SlimeBlockKing_Red_
+  enemyPrefab: {fileID: 8159170161687925106, guid: f7b5ea4c71cbfce44afdc1f96b8d2743, type: 3}
+  chaseDistance: 50

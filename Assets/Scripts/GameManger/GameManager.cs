@@ -34,6 +34,7 @@ public class GameManager : SingletonMonobehaviour<GameManager>
     private Player player;
 
     [HideInInspector] public GameState gameState;
+    [HideInInspector] public GameState previousGameState;
 
 
     protected override void Awake()
@@ -68,6 +69,9 @@ public class GameManager : SingletonMonobehaviour<GameManager>
     // Start is called before the first frame update
     private void Start()
     {
+
+        previousGameState = GameState.gameStarted;
+
         gameState = GameState.gameStarted;
     }
 
@@ -128,6 +132,8 @@ public class GameManager : SingletonMonobehaviour<GameManager>
             Debug.LogError("Couldn't build dungeon from specified rooms and node graphs");
         }
 
+        // Call static event that room has changed.
+        StaticEventHandler.CallRoomChangedEvent(currentRoom);
 
         // Set player roughly mid-room
         player.gameObject.transform.position = new Vector3((currentRoom.lowerBounds.x + currentRoom.upperBounds.x) / 2f, (currentRoom.lowerBounds.y + currentRoom.upperBounds.y) / 2f, 0f);
@@ -154,6 +160,14 @@ public class GameManager : SingletonMonobehaviour<GameManager>
     public Room GetCurrentRoom()
     {
         return currentRoom;
+    }
+
+    /// <summary>
+    /// Get the current dungeon level
+    /// </summary>
+    public DungeonLevelSO GetCurrentDungeonLevel()
+    {
+        return dungeonLevelList[currentDungeonLevelListIndex];
     }
 
 
