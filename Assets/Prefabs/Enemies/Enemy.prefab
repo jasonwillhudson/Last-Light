@@ -286,9 +286,10 @@ GameObject:
   - component: {fileID: -4844147630709601686}
   - component: {fileID: -6007311246327894688}
   - component: {fileID: 3244742083075024768}
+  - component: {fileID: 1990443962025868764}
   m_Layer: 15
   m_Name: Enemy
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -323,7 +324,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyDetails: {fileID: 0}
+  movementToPositionEvent: {fileID: 0}
+  idleEvent: {fileID: 0}
   spriteRendererArray: []
+  animator: {fileID: 0}
 --- !u!210 &7839587495184999944
 SortingGroup:
   m_ObjectHideFlags: 0
@@ -466,6 +470,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 15e749a73fbf70d429679a1575686845, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  movementDetails: {fileID: 0}
+  moveSpeed: 0
 --- !u!114 &-6327220431999916222
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -514,6 +520,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 82450dc45b92a8448a840c6ca436494f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!95 &1990443962025868764
+Animator:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6410792537725264912}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 0}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &6913996707355857283
 GameObject:
   m_ObjectHideFlags: 0

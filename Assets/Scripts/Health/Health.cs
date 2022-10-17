@@ -13,4 +13,14 @@ public class Health : MonoBehaviour
         this.startHealth = startHealth;
         currentHealth = startHealth;
     }
+
+    public void getDamaged(int damage)
+    {
+        currentHealth -= damage;
+    }
+
+    public int getHealth()
+    {
+        return currentHealth;
+    }
 }

@@ -38,7 +38,11 @@ public class Player : MonoBehaviour
     [HideInInspector] public SpriteRenderer spriteRenderer;
     [HideInInspector] public Animator animator;
     [HideInInspector] public AimWeaponEvent aimWeaponEvent;
-    public PlayerAttackEvent playerAttackEvent;
+    [HideInInspector] public PlayerAttackEvent playerAttackEvent;
+
+    public GameObject healthDisplay;
+
+
     private void Awake()
     {
         Debug.Log("Player Loading ...");
@@ -54,9 +58,39 @@ public class Player : MonoBehaviour
 
         //Load Player Attack
         playerAttackEvent = GetComponent<PlayerAttackEvent>();
+
+        //set up the health
+        healthDisplay = GameObject.Find("Health");
+        health.SetStartHealth(3);
+
     }
 
+    public void Update()
+    {
 
+        //get the health value right now
+        int healthValue = health.getHealth();
+
+        if (healthValue <= 0)
+        {
+            healthDisplay.SetActive(false);
+        }
+        else
+        {
+
+            //Display the health that suppose to be displayed
+            for(int i=0; i<healthValue; i++)
+            {
+                healthDisplay.transform.GetChild(i).gameObject.SetActive(true);
+            }
+
+            //Hide the hearts that supposed to be hide
+            for(int i=healthValue; i<6; i++)
+            {
+                healthDisplay.transform.GetChild(i).gameObject.SetActive(false);
+            }
+        }
+    }
     /// <summary>
     /// Initialize the player
     /// </summary>
@@ -64,8 +98,13 @@ public class Player : MonoBehaviour
     {
         this.playerDetail = playerDetail;
 
+  
+    }
+
+    public void InitializeHealth()
+    {
         // Set player starting health
-        health.SetStartHealth(playerDetail.playerHealthAmount);
+        health.SetStartHealth(3);
     }
 
 
@@ -76,4 +115,14 @@ public class Player : MonoBehaviour
     {
         return transform.position;
     }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.collider.gameObject.CompareTag("Enemy"))
+        {
+            health.getDamaged(1);
+            Debug.Log(health.getHealth());
+        }
+    }
+
 }
