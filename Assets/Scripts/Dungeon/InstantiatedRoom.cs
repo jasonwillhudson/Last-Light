@@ -226,7 +226,8 @@ public class InstantiatedRoom : MonoBehaviour
     private void AddObstaclesAndPreferredPaths()
     {
         // this array will be populated with wall obstacles 
-        aStarMovementPenalty = new int[room.templateUpperBounds.x - room.templateLowerBounds.x + 1, room.templateUpperBounds.y - room.templateLowerBounds.y + 1];
+        aStarMovementPenalty = new int[room.templateUpperBounds.x - room.templateLowerBounds.x + 1, 
+            room.templateUpperBounds.y - room.templateLowerBounds.y + 1];
 
 
         // Loop thorugh all grid squares

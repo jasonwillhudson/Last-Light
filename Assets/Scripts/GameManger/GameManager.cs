@@ -64,6 +64,25 @@ public class GameManager : SingletonMonobehaviour<GameManager>
 
     }
 
+    private void OnEnable()
+    {
+        //Subsrcibe to room changed event
+        StaticEventHandler.OnRoomChanged += StaticEventHandler_OnRoomChanged;
+    }
+    
+    private void OnDisable()
+    {
+
+        //unsubsribe from room changed event
+        StaticEventHandler.OnRoomChanged -= StaticEventHandler_OnRoomChanged;
+    }
+
+
+    private void StaticEventHandler_OnRoomChanged(RoomChangedEventArgs roomChangedEventArgs)
+    {
+        SetCurrentRoom(roomChangedEventArgs.room);
+    }
+
 
 
     // Start is called before the first frame update
@@ -152,6 +171,16 @@ public class GameManager : SingletonMonobehaviour<GameManager>
     {
         return player;
     }
+
+    /// <summary>
+    /// Get the player minimap icon
+    /// </summary>
+    public Sprite GetPlayerMiniMapIcon()
+    {
+        return playerDetails.playerMiniMapIcon;
+    }
+
+
 
 
     /// <summary>

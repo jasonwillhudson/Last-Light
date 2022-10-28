@@ -83,6 +83,10 @@ PrefabInstance:
       propertyPath: m_Color.r
       value: 0.990566
       objectReference: {fileID: 0}
+    - target: {fileID: 5529375961355836055, guid: 951cf07fca02aa44da135c2fb2013458, type: 3}
+      propertyPath: m_RenderingLayerMask
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 6522545052786090179, guid: 951cf07fca02aa44da135c2fb2013458, type: 3}
       propertyPath: m_Color.b
       value: 0.99215686

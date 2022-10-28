@@ -8,7 +8,6 @@ using UnityEngine.Rendering;
 [RequireComponent(typeof(MovementToPosition))]
 [RequireComponent(typeof(IdleEvent))]
 [RequireComponent(typeof(Idle))]
-
 //[RequireComponent(typeof(AnimateEnemy))]
 [RequireComponent(typeof(SortingGroup))]
 [RequireComponent(typeof(SpriteRenderer))]
@@ -60,5 +59,4 @@ public class Enemy : MonoBehaviour
         // Set animator speed to match movement speed
         animator.speed = enemyMovementAI.moveSpeed / Settings.baseSpeedForEnemyAnimations;
     }
-
 }
