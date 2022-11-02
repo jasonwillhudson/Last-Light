@@ -251,6 +251,13 @@ public static class HelperUtilities
         return error;
     }
 
+
+
+
+
+
+
+
     /// <summary>
     /// positive range debug check - set isZeroAllowed to true if the min and max range values can both be zero. Returns true if there is an error
     /// </summary>
