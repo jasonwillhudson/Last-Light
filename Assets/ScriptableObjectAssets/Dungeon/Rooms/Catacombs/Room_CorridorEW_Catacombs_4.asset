@@ -15,6 +15,8 @@ MonoBehaviour:
   guid: 72b99787d3d7b40478bd165f6175c96e
   prefab: {fileID: 5351491626515514454, guid: 14663f6e07044fa42b22e4c5bbc709a3, type: 3}
   previousPrefab: {fileID: 5351491626515514454, guid: 14663f6e07044fa42b22e4c5bbc709a3, type: 3}
+  battleMusic: {fileID: 11400000, guid: b5e4477305151de4e98bda52d1a09fba, type: 2}
+  ambientMusic: {fileID: 11400000, guid: 9bc20211331afcb47963a77fadfbb6fd, type: 2}
   roomNodeType: {fileID: 11400000, guid: b553af2c95e46174a885bba846690dc2, type: 2}
   lowerBounds: {x: -3, y: -6}
   upperBounds: {x: 27, y: 10}
@@ -37,3 +39,5 @@ MonoBehaviour:
     isUnavailable: 0
   spawnPositionArray:
   - {x: 21, y: -1}
+  enemiesByLevelList: []
+  roomEnemySpawnParametersList: []
