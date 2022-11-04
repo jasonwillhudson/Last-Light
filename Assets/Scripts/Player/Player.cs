@@ -41,14 +41,16 @@ public class Player : MonoBehaviour
     [HideInInspector] public AimWeaponEvent aimWeaponEvent;
     [HideInInspector] public PlayerAttackEvent playerAttackEvent;
 
+    public static Player instance;
     public GameObject healthDisplay;
 
-    public int attackDamage =10;
+    public int attackDamage = 20;
     public TMP_Text DamageDisplay;
     public GameObject gameover;
 
     private void Awake()
     {
+        instance = this;
         Debug.Log("Player Loading ...");
         // Load components
         health = GetComponent<Health>();
