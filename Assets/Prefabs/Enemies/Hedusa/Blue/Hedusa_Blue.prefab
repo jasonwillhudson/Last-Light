@@ -15,6 +15,10 @@ PrefabInstance:
       propertyPath: enemyDetails
       value: 
       objectReference: {fileID: 11400000, guid: 047dee97551eb854293c2290502bc635, type: 2}
+    - target: {fileID: 1990443962025868764, guid: 09e550d1a1440d648aa77539cf2e5ece, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: 19b6ff9fbadc74e479b63068d33eb245, type: 2}
     - target: {fileID: 5799933993913502554, guid: 09e550d1a1440d648aa77539cf2e5ece, type: 3}
       propertyPath: m_SpriteTilingProperty.oldSize.x
       value: 1.875
