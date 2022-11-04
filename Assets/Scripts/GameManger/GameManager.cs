@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
+
 
 [DisallowMultipleComponent]
 public class GameManager : SingletonMonobehaviour<GameManager>
@@ -37,6 +39,9 @@ public class GameManager : SingletonMonobehaviour<GameManager>
     [HideInInspector] public GameState previousGameState;
 
 
+    private InstantiatedRoom bossRoom;
+
+
     protected override void Awake()
     {
         // Call base class
@@ -68,6 +73,18 @@ public class GameManager : SingletonMonobehaviour<GameManager>
     {
         //Subsrcibe to room changed event
         StaticEventHandler.OnRoomChanged += StaticEventHandler_OnRoomChanged;
+
+
+        // Subscribe to room enemies defeated event
+        StaticEventHandler.OnRoomEnemiesDefeated += StaticEventHandler_OnRoomEnemiesDefeated;
+
+
+
+        // Subscribe to player destroyed event
+       // player.destroyedEvent.OnDestroyed += Player_OnDestroyed;
+
+
+
     }
     
     private void OnDisable()
@@ -75,12 +92,28 @@ public class GameManager : SingletonMonobehaviour<GameManager>
 
         //unsubsribe from room changed event
         StaticEventHandler.OnRoomChanged -= StaticEventHandler_OnRoomChanged;
+
+
+        // Unsubscribe from room enemies defeated event
+        StaticEventHandler.OnRoomEnemiesDefeated -= StaticEventHandler_OnRoomEnemiesDefeated;
+
+        // Unubscribe from player destroyed event
+       // player.destroyedEvent.OnDestroyed -= Player_OnDestroyed;
     }
 
 
     private void StaticEventHandler_OnRoomChanged(RoomChangedEventArgs roomChangedEventArgs)
     {
         SetCurrentRoom(roomChangedEventArgs.room);
+    }
+
+
+    /// <summary>
+    /// Handle room enemies defeated event
+    /// </summary>
+    private void StaticEventHandler_OnRoomEnemiesDefeated(RoomEnemiesDefeatedArgs roomEnemiesDefeatedArgs)
+    {
+        RoomEnemiesDefeated();
     }
 
 
@@ -93,6 +126,19 @@ public class GameManager : SingletonMonobehaviour<GameManager>
 
         gameState = GameState.gameStarted;
     }
+
+    /// <summary>
+    /// Handle player destroyed event
+    /// </summary>
+ /*   private void Player_OnDestroyed(DestroyedEvent destroyedEvent, DestroyedEventArgs destroyedEventArgs)
+    {
+        previousGameState = gameState;
+        gameState = GameState.gameLost;
+    }*/
+
+
+
+
 
     // Update is called once per frame
     private void Update()
@@ -122,6 +168,44 @@ public class GameManager : SingletonMonobehaviour<GameManager>
 
                 gameState = GameState.playingLevel;
 
+
+                // Trigger room enemies defeated since we start in the entrance where there are no enemies (just in case you have a level with just a boss room!)
+                RoomEnemiesDefeated();
+
+                break;
+
+            // handle the level being completed
+            case GameState.levelCompleted:
+
+                // Display level completed text
+                StartCoroutine(LevelCompleted());
+
+                break;
+
+            // handle the game being won (only trigger this once - test the previous game state to do this)
+            case GameState.gameWon:
+
+                if (previousGameState != GameState.gameWon)
+                    StartCoroutine(GameWon());
+
+                break;
+
+            // handle the game being lost (only trigger this once - test the previous game state to do this)
+            case GameState.gameLost:
+
+                if (previousGameState != GameState.gameLost)
+                {
+                    StopAllCoroutines(); // Prevent messages if you clear the level just as you get killed
+                    StartCoroutine(GameLost());
+                }
+
+                break;
+
+            // restart the game
+            case GameState.restartGame:
+
+                RestartGame();
+
                 break;
 
         }
@@ -137,6 +221,59 @@ public class GameManager : SingletonMonobehaviour<GameManager>
 
         //// Debug
         //Debug.Log(room.prefab.name.ToString());
+    }
+
+
+    /// <summary>
+    /// Room enemies defated - test if all dungeon rooms have been cleared of enemies - if so load
+    /// next dungeon game level
+    /// </summary>
+    private void RoomEnemiesDefeated()
+    {
+        // Initialise dungeon as being cleared - but then test each room
+        bool isDungeonClearOfRegularEnemies = true;
+        bossRoom = null;
+
+        // Loop through all dungeon rooms to see if cleared of enemies
+        foreach (KeyValuePair<string, Room> keyValuePair in DungeonBuilder.Instance.dungeonBuilderRoomDictionary)
+        {
+            // skip boss room for time being
+            if (keyValuePair.Value.roomNodeType.isBossRoom)
+            {
+                bossRoom = keyValuePair.Value.instantiatedRoom;
+                continue;
+            }
+
+            // check if other rooms have been cleared of enemies
+            if (!keyValuePair.Value.isClearedOfEnemies)
+            {
+                isDungeonClearOfRegularEnemies = false;
+                break;
+            }
+        }
+
+        // Set game state
+        // If dungeon level completly cleared (i.e. dungeon cleared apart from boss and there is no boss room OR dungeon cleared apart from boss and boss room is also cleared)
+        if ((isDungeonClearOfRegularEnemies && bossRoom == null) || (isDungeonClearOfRegularEnemies && bossRoom.room.isClearedOfEnemies))
+        {
+            // Are there more dungeon levels then
+            if (currentDungeonLevelListIndex < dungeonLevelList.Count - 1)
+            {
+                gameState = GameState.levelCompleted;
+            }
+            else
+            {
+                gameState = GameState.gameWon;
+            }
+        }
+        // Else if dungeon level cleared apart from boss room
+        else if (isDungeonClearOfRegularEnemies)
+        {
+            gameState = GameState.bossStage;
+
+            StartCoroutine(BossStage());
+        }
+
     }
 
 
@@ -162,6 +299,94 @@ public class GameManager : SingletonMonobehaviour<GameManager>
 
 
     }
+
+    /// <summary>
+    /// Enter boss stage
+    /// </summary>
+    private IEnumerator BossStage()
+    {
+        // Activate boss room
+        bossRoom.gameObject.SetActive(true);
+
+        // Unlock boss room
+        bossRoom.UnlockDoors(0f);
+
+        // Wait 2 seconds
+        yield return new WaitForSeconds(2f);
+
+        Debug.Log("Boss stage - find and destroy the boss");
+
+    }
+
+    /// <summary>
+    /// Show level as being completed - load next level
+    /// </summary>
+    private IEnumerator LevelCompleted()
+    {
+        // Play next level
+        gameState = GameState.playingLevel;
+
+        // Wait 2 seconds
+        yield return new WaitForSeconds(2f);
+
+        Debug.Log("Level Completed - Press Return To Progress To The Next Level");
+
+        // When player presses the return key proceed to the next level
+        while (!Input.GetKeyDown(KeyCode.Return))
+        {
+            yield return null;
+        }
+
+        yield return null; // to avoid enter being detected twice
+
+        // Increase index to next level
+        currentDungeonLevelListIndex++;
+
+        PlayDungeonLevel(currentDungeonLevelListIndex);
+    }
+
+
+    /// <summary>
+    /// Game Won
+    /// </summary>
+    private IEnumerator GameWon()
+    {
+        previousGameState = GameState.gameWon;
+
+        Debug.Log("Game Won! - All levels completed and bosses defeated.  Game will restart in 10 seconds");
+
+        // Wait 10 seconds
+        yield return new WaitForSeconds(10f);
+
+        // Set game state to restart game
+        gameState = GameState.restartGame;
+    }
+
+    /// <summary>
+    /// Game Lost
+    /// </summary>
+    private IEnumerator GameLost()
+    {
+        previousGameState = GameState.gameLost;
+
+        Debug.Log("Game Lost - Bad luck!.  Game will restart in 10 seconds");
+
+        // Wait 10 seconds
+        yield return new WaitForSeconds(10f);
+
+        // Set game state to restart game
+        gameState = GameState.restartGame;
+    }
+
+    /// <summary>
+    /// Restart the game
+    /// </summary>
+    private void RestartGame()
+    {
+        //SceneManager.LoadScene("MainGameScene");
+    }
+
+  
 
 
     /// <summary>
