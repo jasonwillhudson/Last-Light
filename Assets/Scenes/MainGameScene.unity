@@ -3927,6 +3927,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 76400525}
     m_Modifications:
+    - target: {fileID: 5670545587752277816, guid: 45e7c46b62c41574e8e903122d83bef3, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 1243399981, guid: 08c09ad7e77b29d41a30dbccf70de1c1, type: 3}
+    - target: {fileID: 5670545587790647124, guid: 45e7c46b62c41574e8e903122d83bef3, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 1243399981, guid: 08c09ad7e77b29d41a30dbccf70de1c1, type: 3}
     - target: {fileID: 5670545587800174324, guid: 45e7c46b62c41574e8e903122d83bef3, type: 3}
       propertyPath: m_Name
       value: Health
@@ -3975,5 +3983,17 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5670545587897645163, guid: 45e7c46b62c41574e8e903122d83bef3, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 1243399981, guid: 08c09ad7e77b29d41a30dbccf70de1c1, type: 3}
+    - target: {fileID: 5670545588534298469, guid: 45e7c46b62c41574e8e903122d83bef3, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 1243399981, guid: 08c09ad7e77b29d41a30dbccf70de1c1, type: 3}
+    - target: {fileID: 5670545589045103920, guid: 45e7c46b62c41574e8e903122d83bef3, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 1243399981, guid: 08c09ad7e77b29d41a30dbccf70de1c1, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 45e7c46b62c41574e8e903122d83bef3, type: 3}

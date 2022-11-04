@@ -3,6 +3,9 @@ using UnityEngine;
 using UnityEngine.Rendering;
 
 #region REQUIRE COMPONENTS
+
+[RequireComponent(typeof(DestroyedEvent))]
+[RequireComponent(typeof(Destroyed))]
 [RequireComponent(typeof(EnemyMovementAI))]
 [RequireComponent(typeof(MovementToPositionEvent))]
 [RequireComponent(typeof(MovementToPosition))]
@@ -60,6 +63,8 @@ public class Enemy : MonoBehaviour
 
         if (healthValue <= 0)
         {
+            EnemyDestroyed();
+
             Destroy(this.gameObject);
         }
         else
@@ -71,14 +76,26 @@ public class Enemy : MonoBehaviour
     }
 
     /// <summary>
+    /// Enemy destroyed
+    /// </summary>
+    private void EnemyDestroyed()
+    {
+        DestroyedEvent destroyedEvent = GetComponent<DestroyedEvent>();
+        destroyedEvent.CallDestroyedEvent();
+    }
+
+
+
+
+    /// <summary>
     /// Initialise the enemy
     /// </summary>
     public void EnemyInitialization(EnemyDetailsSO enemyDetails, int enemySpawnNumber, DungeonLevelSO dungeonLevel)
     {
         this.enemyDetails = enemyDetails;
 
-
         SetEnemyMovementUpdateFrame(enemySpawnNumber);
+
 
         SetEnemyAnimationSpeed();
 
@@ -93,6 +110,10 @@ public class Enemy : MonoBehaviour
         // Set frame number that enemy should process it's updates
         enemyMovementAI.SetUpdateFrameNumber(enemySpawnNumber % Settings.targetFrameRateToSpreadPathfindingOver);
     }
+
+
+
+
 
     /// <summary>
     /// Set enemy animator speed to match movement speed
