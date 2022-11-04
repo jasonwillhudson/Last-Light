@@ -45,6 +45,7 @@ public class Player : MonoBehaviour
 
     public int attackDamage =10;
     public TMP_Text DamageDisplay;
+    public GameObject gameover;
 
     private void Awake()
     {
@@ -68,15 +69,24 @@ public class Player : MonoBehaviour
 
     }
 
+    private void Start()
+    {
+        GameObject.Find("game over").GetComponent<SpriteRenderer>().enabled = false;
+    }
+
     public void Update()
     {
 
         //get the health value right now
         int healthValue = health.getHealth();
+        
 
         if (healthValue <= 0)
         {
             healthDisplay.SetActive(false);
+            GameObject.Find("UI").transform.GetChild(0).gameObject.SetActive(false);
+            GameObject.Find("game over").GetComponent<SpriteRenderer>().enabled = true;
+            //Destroy(this.gameObject);
         }
         else
         {
