@@ -75,6 +75,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: GoldenBarrel
       objectReference: {fileID: 0}
+    - target: {fileID: 1987746917885836618, guid: e229b1b0b2f190c4cbf378cb21f47d8c, type: 3}
+      propertyPath: m_TagString
+      value: AttackBonus
+      objectReference: {fileID: 0}
     - target: {fileID: 4457458052836423794, guid: e229b1b0b2f190c4cbf378cb21f47d8c, type: 3}
       propertyPath: m_Size.y
       value: 0.49541605

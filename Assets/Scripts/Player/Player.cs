@@ -2,7 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Rendering;
-
+using UnityEngine.UI;
+using TMPro;
 
 #region REQUIRE COMPONENTS
 
@@ -42,6 +43,8 @@ public class Player : MonoBehaviour
 
     public GameObject healthDisplay;
 
+    public int attackDamage =10;
+    public TMP_Text DamageDisplay;
 
     private void Awake()
     {
@@ -90,6 +93,9 @@ public class Player : MonoBehaviour
                 healthDisplay.transform.GetChild(i).gameObject.SetActive(false);
             }
         }
+
+        //change the display text
+        DamageDisplay.text  = "AD "+attackDamage; 
     }
     /// <summary>
     /// Initialize the player
@@ -121,8 +127,36 @@ public class Player : MonoBehaviour
         if (collision.collider.gameObject.CompareTag("Enemy"))
         {
             health.getDamaged(1);
-            Debug.Log(health.getHealth());
         }
+    }
+
+    void OnTriggerEnter2D(Collider2D collision)
+    {
+        GameObject obj = collision.gameObject;
+
+        if (collision.gameObject.CompareTag("HealthPortion"))
+        {
+            Destroy(collision.gameObject);
+            health.gainHealth(1);
+        }
+        switch (obj.tag)
+        {
+
+            case "HealthPortion":
+                Destroy(collision.gameObject);
+                health.gainHealth(1);
+                break;
+
+            case "AttackBonus":
+                Destroy(collision.gameObject);
+                this.attackDamage += 2;
+                break;
+
+
+            default:
+                break;
+        }
+
     }
 
 }

@@ -21,7 +21,7 @@ public class AttackMonster : MonoBehaviour
         Debug.Log("GameObject1 collided with " + collision.gameObject.tag);
         if (collision.gameObject.CompareTag("Enemy") && attackStatus && !cooldown)
         {
-            collision.gameObject.GetComponent<Enemy>().health.getDamaged(20);
+            collision.gameObject.GetComponent<Enemy>().health.getDamaged(player.GetComponent<Player>().attackDamage);
             Debug.Log("Attack Monster");
             cooldown = true;
 

@@ -23,4 +23,10 @@ public class Health : MonoBehaviour
     {
         return currentHealth;
     }
+
+    public void gainHealth(int p)
+    {
+        currentHealth += p;
+        if (currentHealth > 6) currentHealth = 6;
+    }
 }
