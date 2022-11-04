@@ -7,6 +7,8 @@ public class PlayerAttack : MonoBehaviour
     private Rigidbody2D rigidBody2D;
     private PlayerAttackEvent playerAttackEvent;
 
+    private bool attackStatus = false;
+
     private void Awake()
     {
         // Load components

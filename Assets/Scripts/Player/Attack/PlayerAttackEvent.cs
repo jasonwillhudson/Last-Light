@@ -11,6 +11,8 @@ public class PlayerAttackEvent : MonoBehaviour
     {
         OnPlayerAttack?.Invoke(this, new PlayerAttackArgs() { skilltype = skilltype, isAttacking = isAttacking });
     }
+
+
 }
 
 public class PlayerAttackArgs : EventArgs

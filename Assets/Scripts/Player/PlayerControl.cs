@@ -44,6 +44,10 @@ public class PlayerControl : MonoBehaviour
     }
 
 
+    public bool getAttackStatus(){
+        return isRotaionDisabled; // true if it is attacking
+}
+
 
     /// <summary>
     /// Set player animator speed to match movement speed
@@ -91,7 +95,7 @@ public class PlayerControl : MonoBehaviour
             {
                 player.playerAttackEvent.CallPlayerAttackEvent("attack_1", true);//call the attack event
                 Debug.Log("Attack");
-                attackTimer = 0.3f;
+                attackTimer = 0.5f;
             }
         }
         

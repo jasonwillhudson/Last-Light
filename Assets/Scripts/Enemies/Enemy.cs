@@ -32,6 +32,8 @@ public class Enemy : MonoBehaviour
     private PolygonCollider2D polygonCollider2D;
     [HideInInspector] public SpriteRenderer[] spriteRendererArray;
     [HideInInspector] public Animator animator;
+    [HideInInspector] public Health health;
+    public GameObject healthbar;
 
     private void Awake()
     {
@@ -44,6 +46,28 @@ public class Enemy : MonoBehaviour
         polygonCollider2D = GetComponent<PolygonCollider2D>();
         spriteRendererArray = GetComponentsInChildren<SpriteRenderer>();
         animator = GetComponent<Animator>();
+
+        //set the health
+        health = GetComponent<Health>();
+        health.SetStartHealth(100);
+    }
+
+    public void Update()
+    {
+
+        //get the health value right now
+        float healthValue = health.getHealth();
+
+        if (healthValue <= 0)
+        {
+            Destroy(this.gameObject);
+        }
+        else
+        {
+
+            healthbar.transform.localScale = new Vector3(healthValue/100, 1, 1);
+            Debug.Log(healthValue / 100);
+        }
     }
 
     /// <summary>
@@ -101,4 +125,7 @@ public class Enemy : MonoBehaviour
         enemyMovementAI.enabled = isEnabled;
 
     }
+
+
+
 }
