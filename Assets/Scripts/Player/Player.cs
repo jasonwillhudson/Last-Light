@@ -87,6 +87,7 @@ public class Player : MonoBehaviour
         {
             healthDisplay.SetActive(false);
             GameObject.Find("UI").transform.GetChild(0).gameObject.SetActive(false);
+            GameObject.Find("UI Controller").transform.GetChild(0).gameObject.SetActive(false);
             GameObject.Find("game over").GetComponent<SpriteRenderer>().enabled = true;
             //Destroy(this.gameObject);
         }
