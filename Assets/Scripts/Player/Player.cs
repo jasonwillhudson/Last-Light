@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Rendering;
 using UnityEngine.UI;
+using TMPro;
 
 #region REQUIRE COMPONENTS
 
@@ -40,18 +41,14 @@ public class Player : MonoBehaviour
     [HideInInspector] public AimWeaponEvent aimWeaponEvent;
     [HideInInspector] public PlayerAttackEvent playerAttackEvent;
 
-    public static Player instance;
-
     public GameObject healthDisplay;
 
-    public int attackDamage = 25;
-    public Text DamageDisplay;
+    public int attackDamage =10;
+    public TMP_Text DamageDisplay;
+    public GameObject gameover;
 
     private void Awake()
     {
-        instance = this;
-
-
         Debug.Log("Player Loading ...");
         // Load components
         health = GetComponent<Health>();
@@ -72,15 +69,24 @@ public class Player : MonoBehaviour
 
     }
 
+    private void Start()
+    {
+        GameObject.Find("game over").GetComponent<SpriteRenderer>().enabled = false;
+    }
+
     public void Update()
     {
 
         //get the health value right now
         int healthValue = health.getHealth();
+        
 
         if (healthValue <= 0)
         {
             healthDisplay.SetActive(false);
+            GameObject.Find("UI").transform.GetChild(0).gameObject.SetActive(false);
+            GameObject.Find("game over").GetComponent<SpriteRenderer>().enabled = true;
+            //Destroy(this.gameObject);
         }
         else
         {
@@ -99,7 +105,7 @@ public class Player : MonoBehaviour
         }
 
         //change the display text
-        //DamageDisplay.text  = "AD "+attackDamage; 
+        DamageDisplay.text  = "AD "+attackDamage; 
     }
     /// <summary>
     /// Initialize the player
