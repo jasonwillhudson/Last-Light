@@ -20,7 +20,7 @@ public class PlayerControl : MonoBehaviour
     private Player player;
     private float moveSpeed;
     private float attackTimer = 0f;
-
+    private float cooldown = 0f;
 
     private bool isPlayerMovementDisabled = false;
     private bool isRotaionDisabled = false;
@@ -80,6 +80,10 @@ public class PlayerControl : MonoBehaviour
     //player attack input
     private void PlayerAttackInput()
     {
+        //attack cool down
+        if(cooldown > 0) cooldown -= Time.deltaTime;
+
+        //attack duration
         if (attackTimer > 0)
         {
             attackTimer -= Time.deltaTime;
@@ -91,11 +95,12 @@ public class PlayerControl : MonoBehaviour
             isRotaionDisabled = false;
             player.playerAttackEvent.CallPlayerAttackEvent("attack_1", false);//call the attack event
 
-            if (Input.GetMouseButtonDown(0))
+            if (cooldown <= 0 && Input.GetMouseButtonDown(0))
             {
                 player.playerAttackEvent.CallPlayerAttackEvent("attack_1", true);//call the attack event
                 Debug.Log("Attack");
-                attackTimer = 0.5f;
+                attackTimer = 0.2f;
+                cooldown = 0.6f;
             }
         }
         
