@@ -44,7 +44,7 @@ public class Player : MonoBehaviour
     public static Player instance;
     public GameObject healthDisplay;
 
-    public int attackDamage = 20;
+    public int attackDamage = 60;
     public TMP_Text DamageDisplay;
     public GameObject gameover;
 
@@ -88,7 +88,7 @@ public class Player : MonoBehaviour
             healthDisplay.SetActive(false);
             GameObject.Find("UI").transform.GetChild(0).gameObject.SetActive(false);
             GameObject.Find("game over").GetComponent<SpriteRenderer>().enabled = true;
-            //Destroy(this.gameObject);
+            Destroy(this.gameObject);
         }
         else
         {
