@@ -135,13 +135,6 @@ public class Player : MonoBehaviour
         return transform.position;
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-        if (collision.collider.gameObject.CompareTag("Enemy"))
-        {
-            health.getDamaged(1);
-        }
-    }
 
     void OnTriggerEnter2D(Collider2D collision)
     {
@@ -158,6 +151,7 @@ public class Player : MonoBehaviour
             case "HealthPortion":
                 Destroy(collision.gameObject);
                 health.gainHealth(1);
+                transform.Find("pickupHeartEffect").GetComponent<ParticleSystem>().Play();
                 break;
 
             case "AttackBonus":

@@ -21,7 +21,8 @@ public class AttackMonster : MonoBehaviour
         {
             collision.gameObject.GetComponent<Enemy>().health.getDamaged(player.GetComponent<Player>().attackDamage);
             collision.gameObject.GetComponent<Enemy>().health.isImmune=true;
-            Debug.Log("Attack Monster");
+            collision.gameObject.transform.Find("hitEffect").gameObject.GetComponent<ParticleSystem>().Play();
+            //Debug.Log("Attack Monster");
 
         }
 
