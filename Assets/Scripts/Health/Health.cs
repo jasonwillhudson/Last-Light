@@ -7,7 +7,13 @@ public class Health : MonoBehaviour
 
     private int startHealth;
     private int currentHealth;
+    private float cooldown = 0.2f;
+    [HideInInspector] public bool isImmune = false;
 
+    private void Update()
+    {
+        immuneCountDown();
+    }
     public void SetStartHealth(int startHealth)
     {
         this.startHealth = startHealth;
@@ -16,7 +22,7 @@ public class Health : MonoBehaviour
 
     public void getDamaged(int damage)
     {
-        currentHealth -= damage;
+        if(!isImmune) currentHealth -= damage;
     }
 
     public int getHealth()
@@ -28,5 +34,17 @@ public class Health : MonoBehaviour
     {
         currentHealth += p;
         if (currentHealth > 6) currentHealth = 6;
+    }
+
+    private void immuneCountDown()
+    {
+        cooldown -= Time.deltaTime;
+
+        if (isImmune && cooldown < 0)
+        {
+
+            isImmune = false; // make sure we dont' call this again
+
+        }
     }
 }

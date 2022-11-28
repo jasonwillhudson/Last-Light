@@ -7,23 +7,22 @@ public class AttackMonster : MonoBehaviour
 
     public GameObject player;
     private bool attackStatus = false;
-    private bool cooldown = false;
 
     void Update()
     {
         attackStatus = player.GetComponent<Player>().playerControl.getAttackStatus();
-        if (!attackStatus) cooldown = false; //reset cooldown
 
     }
     void OnTriggerEnter2D(Collider2D collision)
     {
 
         Debug.Log("GameObject1 collided with " + collision.gameObject.tag);
-        if (collision.gameObject.CompareTag("Enemy") && attackStatus && !cooldown)
+        if (collision.gameObject.CompareTag("Enemy") && attackStatus)
         {
             collision.gameObject.GetComponent<Enemy>().health.getDamaged(player.GetComponent<Player>().attackDamage);
-            Debug.Log("Attack Monster");
-            cooldown = true;
+            collision.gameObject.GetComponent<Enemy>().health.isImmune=true;
+            collision.gameObject.transform.Find("hitEffect").gameObject.GetComponent<ParticleSystem>().Play();
+            //Debug.Log("Attack Monster");
 
         }
 

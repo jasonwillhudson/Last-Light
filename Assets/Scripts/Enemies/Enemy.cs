@@ -37,6 +37,9 @@ public class Enemy : MonoBehaviour
     [HideInInspector] public Animator animator;
     [HideInInspector] public Health health;
     public GameObject healthbar;
+    public GameObject deathEffect;
+    public GameObject healthPortion;
+    private const float dropChance = 9f / 10f;  // Set odds here - e.g. 5 in 10 chance.
 
     private void Awake()
     {
@@ -63,15 +66,24 @@ public class Enemy : MonoBehaviour
 
         if (healthValue <= 0)
         {
-            EnemyDestroyed();
+            //generate death effect
+            GameObject temp = Instantiate(deathEffect, transform.position, Quaternion.identity);
+            transform.parent = temp.transform;
+
+            if (Random.Range(0f, 1f) <= dropChance)
+            {
+                GameObject p = Instantiate(healthPortion, transform.position, Quaternion.identity);
+                temp.transform.parent = p.transform;
+            }
 
             Destroy(this.gameObject);
+            EnemyDestroyed();
+            
         }
         else
         {
 
             healthbar.transform.localScale = new Vector3(healthValue/100, 1, 1);
-            Debug.Log(healthValue / 100);
         }
     }
 

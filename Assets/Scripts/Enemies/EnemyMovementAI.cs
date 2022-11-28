@@ -21,6 +21,14 @@ public class EnemyMovementAI : MonoBehaviour
     private bool chasePlayer = false;
     [HideInInspector] public int updateFrameNumber = 1; // default value.  This is set by the enemy spawner.
 
+    //Emeny Attack 
+    private float postAttackMoveDelay = 2f;
+    private float attackCoolDown = 3f;
+    private float timeSinceLastAttack = 0f;
+    private bool inRange = false;
+    private bool attackedAlready = false; // already damaged player once
+    [HideInInspector] public bool isAttack=false;
+    [HideInInspector] public GameObject attackEffect;
 
     private void Awake()
     {
@@ -28,6 +36,8 @@ public class EnemyMovementAI : MonoBehaviour
         enemy = GetComponent<Enemy>();
 
         moveSpeed = movementDetails.GetMoveSpeed();
+
+        attackEffect = transform.Find("attack").gameObject;
     }
 
     private void Start()
@@ -40,8 +50,59 @@ public class EnemyMovementAI : MonoBehaviour
 
     }
 
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.CompareTag("Player")) {
+            inRange = true;
+            if (Time.time - timeSinceLastAttack > 0.5f && !attackedAlready)
+            {
+                collision.gameObject.GetComponent<ParticleSystem>().Play();
+                collision.gameObject.GetComponent<Player>().health.getDamaged(1);
+                
+                attackedAlready = true;
+            }
+        }
+    }
+
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.gameObject.CompareTag("Player"))
+        {
+            inRange = false;
+        }
+    }
+
     private void Update()
     {
+
+        //if player in attack range
+        if (inRange)
+        {
+           Attack();
+            return;
+        }
+
+        //not in attack range, then chase
+        Chase();
+        return;
+     
+
+    }
+
+    void Attack()
+    {
+        if (timeSinceLastAttack + attackCoolDown > Time.time)
+            return;
+
+        attackEffect.GetComponent<ParticleSystem>().Play();
+        //Do attack stuff
+        attackedAlready = false;
+        timeSinceLastAttack = Time.time;
+    }
+
+    void Chase()
+    {
+        //Do move stuff
         MoveEnemy();
     }
 
@@ -60,8 +121,8 @@ public class EnemyMovementAI : MonoBehaviour
             chasePlayer = true;
         }
 
-        // If not close enough to chase player then return
-        if (!chasePlayer)
+        // If not close enough or attack stopping to chase player then return
+        if (!chasePlayer || timeSinceLastAttack + postAttackMoveDelay > Time.time)
             return;
 
         // Only process A Star path rebuild on certain frames to spread the load between enemies
