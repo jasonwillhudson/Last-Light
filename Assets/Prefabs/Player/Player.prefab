@@ -10368,7 +10368,7 @@ GameObject:
   - component: {fileID: 450871790253045321}
   m_Layer: 10
   m_Name: WeaponPosition
-  m_TagString: playerWeapon
+  m_TagString: weapon
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
