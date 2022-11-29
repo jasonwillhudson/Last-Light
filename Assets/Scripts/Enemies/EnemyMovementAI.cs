@@ -56,7 +56,7 @@ public class EnemyMovementAI : MonoBehaviour
             inRange = true;
             if (Time.time - timeSinceLastAttack > 0.5f && !attackedAlready)
             {
-                collision.gameObject.GetComponent<ParticleSystem>().Play();
+                collision.gameObject.transform.Find("heartBrokenEffect").gameObject.GetComponent<ParticleSystem>().Play();
                 collision.gameObject.GetComponent<Player>().health.getDamaged(1);
                 
                 attackedAlready = true;

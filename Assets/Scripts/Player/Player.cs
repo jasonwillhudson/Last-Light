@@ -51,7 +51,7 @@ public class Player : MonoBehaviour
     private void Awake()
     {
         instance = this;
-        Debug.Log("Player Loading ...");
+
         // Load components
         health = GetComponent<Health>();
         playerControl = GetComponent<PlayerControl>();
