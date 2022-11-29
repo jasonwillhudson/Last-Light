@@ -27,6 +27,8 @@ public class PlayerControl : MonoBehaviour
     private bool isPlayerMovementDisabled = false;
     private bool isRotaionDisabled = false;
 
+  
+
     [HideInInspector] public bool isPlayerRolling = false;
 
 
@@ -63,6 +65,8 @@ public class PlayerControl : MonoBehaviour
 
     private void Update()
     {
+
+
         // if player movement disabled then return
         if (isPlayerMovementDisabled)
             return;
