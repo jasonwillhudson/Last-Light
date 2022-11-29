@@ -5527,7 +5527,7 @@ MonoBehaviour:
   aimWeaponEvent: {fileID: 0}
   playerAttackEvent: {fileID: 0}
   healthDisplay: {fileID: 5670545587800174324, guid: 45e7c46b62c41574e8e903122d83bef3, type: 3}
-  attackDamage: 20
+  attackDamage: 80
   DamageDisplay: {fileID: 4599462914187051899, guid: 6434dd85e326e2d48ba4feca75f26a67, type: 3}
   gameover: {fileID: 5851072758274442084, guid: 46678a20ef60f93448d304aaeb6fe384, type: 3}
 --- !u!114 &4466989258600888314

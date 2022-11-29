@@ -1006,7 +1006,7 @@ Tilemap:
     second:
       serializedVersion: 2
       m_TileIndex: 55
-      m_TileSpriteIndex: 35
+      m_TileSpriteIndex: 57
       m_TileMatrixIndex: 0
       m_TileColorIndex: 0
       m_TileObjectToInstantiateIndex: 65535
@@ -3565,8 +3565,8 @@ Tilemap:
     m_Data: {fileID: 0}
   - m_RefCount: 0
     m_Data: {fileID: 0}
-  - m_RefCount: 1
-    m_Data: {fileID: -410986742, guid: 52eb31498da10b54ab8f5fd95e70ba77, type: 3}
+  - m_RefCount: 0
+    m_Data: {fileID: 0}
   - m_RefCount: 0
     m_Data: {fileID: 0}
   - m_RefCount: 0
@@ -3609,8 +3609,8 @@ Tilemap:
     m_Data: {fileID: 1929640379, guid: 52eb31498da10b54ab8f5fd95e70ba77, type: 3}
   - m_RefCount: 3
     m_Data: {fileID: 882473403, guid: 52eb31498da10b54ab8f5fd95e70ba77, type: 3}
-  - m_RefCount: 0
-    m_Data: {fileID: 0}
+  - m_RefCount: 1
+    m_Data: {fileID: -410986742, guid: 52eb31498da10b54ab8f5fd95e70ba77, type: 3}
   - m_RefCount: 12
     m_Data: {fileID: 352912362, guid: 52eb31498da10b54ab8f5fd95e70ba77, type: 3}
   - m_RefCount: 1
@@ -3853,6 +3853,7 @@ MonoBehaviour:
   roomColliderBounds:
     m_Center: {x: 0, y: 0, z: 0}
     m_Extent: {x: 0, y: 0, z: 0}
+  environmentGameObject: {fileID: 3276278848991554097}
 --- !u!114 &7123901324625325587
 MonoBehaviour:
   m_ObjectHideFlags: 0

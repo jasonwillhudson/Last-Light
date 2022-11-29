@@ -7190,6 +7190,7 @@ MonoBehaviour:
   roomColliderBounds:
     m_Center: {x: 0, y: 0, z: 0}
     m_Extent: {x: 0, y: 0, z: 0}
+  environmentGameObject: {fileID: 2317068385254769796}
 --- !u!114 &2918769582121905245
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -21211,7 +21212,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2103566868959671901, guid: 8747c86de82579a49af2373cf1c60261, type: 3}
       propertyPath: m_InstanceId
-      value: -929512
+      value: -107804
       objectReference: {fileID: 0}
     - target: {fileID: 3508066828337312498, guid: 8747c86de82579a49af2373cf1c60261, type: 3}
       propertyPath: m_Name
@@ -21281,7 +21282,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2103566868959671901, guid: 8747c86de82579a49af2373cf1c60261, type: 3}
       propertyPath: m_InstanceId
-      value: -926236
+      value: -107824
       objectReference: {fileID: 0}
     - target: {fileID: 3508066828337312498, guid: 8747c86de82579a49af2373cf1c60261, type: 3}
       propertyPath: m_Name
@@ -21351,7 +21352,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2103566868959671901, guid: 8747c86de82579a49af2373cf1c60261, type: 3}
       propertyPath: m_InstanceId
-      value: -927418
+      value: -107844
       objectReference: {fileID: 0}
     - target: {fileID: 3508066828337312498, guid: 8747c86de82579a49af2373cf1c60261, type: 3}
       propertyPath: m_Name
@@ -21421,7 +21422,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2103566868959671901, guid: 8747c86de82579a49af2373cf1c60261, type: 3}
       propertyPath: m_InstanceId
-      value: -928370
+      value: -107864
       objectReference: {fileID: 0}
     - target: {fileID: 3508066828337312498, guid: 8747c86de82579a49af2373cf1c60261, type: 3}
       propertyPath: m_Name
@@ -21491,7 +21492,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2103566868959671901, guid: 8747c86de82579a49af2373cf1c60261, type: 3}
       propertyPath: m_InstanceId
-      value: -925976
+      value: -107884
       objectReference: {fileID: 0}
     - target: {fileID: 3508066828337312498, guid: 8747c86de82579a49af2373cf1c60261, type: 3}
       propertyPath: m_Name

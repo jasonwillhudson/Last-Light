@@ -9893,6 +9893,7 @@ MonoBehaviour:
   roomColliderBounds:
     m_Center: {x: 0, y: 0, z: 0}
     m_Extent: {x: 0, y: 0, z: 0}
+  environmentGameObject: {fileID: 2317068385254769796}
 --- !u!114 &-58778680577483700
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -17061,7 +17062,7 @@ Tilemap:
     second:
       serializedVersion: 2
       m_TileIndex: 86
-      m_TileSpriteIndex: 85
+      m_TileSpriteIndex: 91
       m_TileMatrixIndex: 0
       m_TileColorIndex: 0
       m_TileObjectToInstantiateIndex: 65535
@@ -17361,7 +17362,7 @@ Tilemap:
     second:
       serializedVersion: 2
       m_TileIndex: 84
-      m_TileSpriteIndex: 81
+      m_TileSpriteIndex: 89
       m_TileMatrixIndex: 0
       m_TileColorIndex: 0
       m_TileObjectToInstantiateIndex: 65535
@@ -17868,28 +17869,28 @@ Tilemap:
     m_Data: {fileID: 0}
   - m_RefCount: 0
     m_Data: {fileID: 0}
-  - m_RefCount: 1
-    m_Data: {fileID: -1687347202, guid: 52eb31498da10b54ab8f5fd95e70ba77, type: 3}
+  - m_RefCount: 0
+    m_Data: {fileID: 0}
   - m_RefCount: 2
     m_Data: {fileID: -228985526, guid: 52eb31498da10b54ab8f5fd95e70ba77, type: 3}
   - m_RefCount: 0
     m_Data: {fileID: 0}
   - m_RefCount: 0
     m_Data: {fileID: 0}
-  - m_RefCount: 1
-    m_Data: {fileID: -410986742, guid: 52eb31498da10b54ab8f5fd95e70ba77, type: 3}
+  - m_RefCount: 0
+    m_Data: {fileID: 0}
   - m_RefCount: 0
     m_Data: {fileID: 0}
   - m_RefCount: 84
     m_Data: {fileID: 764091631, guid: 52eb31498da10b54ab8f5fd95e70ba77, type: 3}
   - m_RefCount: 6
     m_Data: {fileID: 2141562276, guid: 52eb31498da10b54ab8f5fd95e70ba77, type: 3}
-  - m_RefCount: 0
-    m_Data: {fileID: 0}
+  - m_RefCount: 1
+    m_Data: {fileID: -1687347202, guid: 52eb31498da10b54ab8f5fd95e70ba77, type: 3}
   - m_RefCount: 6
     m_Data: {fileID: 1952021654, guid: 52eb31498da10b54ab8f5fd95e70ba77, type: 3}
-  - m_RefCount: 0
-    m_Data: {fileID: 0}
+  - m_RefCount: 1
+    m_Data: {fileID: -410986742, guid: 52eb31498da10b54ab8f5fd95e70ba77, type: 3}
   - m_RefCount: 28
     m_Data: {fileID: 1085446375, guid: 52eb31498da10b54ab8f5fd95e70ba77, type: 3}
   m_TileMatrixArray:

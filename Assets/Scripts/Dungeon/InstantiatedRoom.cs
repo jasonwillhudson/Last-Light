@@ -18,6 +18,21 @@ public class InstantiatedRoom : MonoBehaviour
     [HideInInspector] public int[,] aStarMovementPenalty;  // use this 2d array to store movement penalties from the tilemaps to be used in AStar pathfinding
     [HideInInspector] public Bounds roomColliderBounds;
 
+    #region Header OBJECT REFERENCES
+
+    [Space(10)]
+    [Header("OBJECT REFERENCES")]
+
+    #endregion Header OBJECT REFERENCES
+
+    #region Tooltip
+
+    [Tooltip("Populate with the environment child placeholder gameobject ")]
+
+    #endregion Tooltip
+
+    [SerializeField] private GameObject environmentGameObject;
+
     private BoxCollider2D boxCollider2D;
 
     private void Awake()
@@ -317,6 +332,10 @@ public class InstantiatedRoom : MonoBehaviour
 
                     // lock the door to prevent access to the room
                     doorComponent.LockDoor();
+
+                    // Instantiate skull icon for minimap by door
+                    GameObject skullIcon = Instantiate(GameResources.Instance.minimapSkullPrefab, gameObject.transform);
+                    skullIcon.transform.localPosition = door.transform.localPosition;
                 }
             }
 
@@ -352,6 +371,18 @@ public class InstantiatedRoom : MonoBehaviour
     public void EnableRoomCollider()
     {
         boxCollider2D.enabled = true;
+    }
+
+    public void ActivateEnvironmentGameObjects()
+    {
+        if (environmentGameObject != null)
+            environmentGameObject.SetActive(true);
+    }
+
+    public void DeactivateEnvironmentGameObjects()
+    {
+        if (environmentGameObject != null)
+            environmentGameObject.SetActive(false);
     }
 
 
@@ -405,7 +436,18 @@ public class InstantiatedRoom : MonoBehaviour
     }
 
 
+    #region Validation
 
+#if UNITY_EDITOR
+
+    private void OnValidate()
+    {
+        HelperUtilities.ValidateCheckNullValue(this, nameof(environmentGameObject), environmentGameObject);
+    }
+
+#endif
+
+    #endregion Validation
 
 
 }

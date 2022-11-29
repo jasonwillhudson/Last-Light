@@ -56,6 +56,11 @@ public class GameResources : MonoBehaviour
     #endregion Tooltip
     public AudioMixerSnapshot musicOffSnapshot;
 
+    #region Tooltip
+    [Tooltip("Main menu music scriptable object")]
+    #endregion Tooltip
+    public MusicTrackSO mainMenuMusic;
+
 
     #region Header SOUNDS
     [Space(10)]
@@ -116,6 +121,17 @@ public class GameResources : MonoBehaviour
     #endregion
     public GameObject ammoIconPrefab;
 
+    #region Header MINIMAP
+    [Space(10)]
+    [Header("MINIMAP")]
+    #endregion
+    #region Tooltip
+    [Tooltip("Minimap skull prefab")]
+    #endregion
+    public GameObject minimapSkullPrefab;
+
+
+
     #region Validation
 #if UNITY_EDITOR
     // Validate the scriptable object details entered
@@ -124,6 +140,8 @@ public class GameResources : MonoBehaviour
         HelperUtilities.ValidateCheckNullValue(this, nameof(roomNodeTypeList), roomNodeTypeList);
         HelperUtilities.ValidateCheckNullValue(this, nameof(currentPlayer), currentPlayer);
         HelperUtilities.ValidateCheckNullValue(this, nameof(soundsMasterMixerGroup), soundsMasterMixerGroup);
+        HelperUtilities.ValidateCheckNullValue(this, nameof(mainMenuMusic), mainMenuMusic);
+
         HelperUtilities.ValidateCheckNullValue(this, nameof(doorOpenCloseSoundEffect), doorOpenCloseSoundEffect);
         HelperUtilities.ValidateCheckNullValue(this, nameof(litMaterial), litMaterial);
         HelperUtilities.ValidateCheckNullValue(this, nameof(dimmedMaterial), dimmedMaterial);
@@ -136,6 +154,9 @@ public class GameResources : MonoBehaviour
         HelperUtilities.ValidateCheckNullValue(this, nameof(musicOffSnapshot), musicOffSnapshot);
 
         HelperUtilities.ValidateCheckNullValue(this, nameof(ammoIconPrefab), ammoIconPrefab);
+
+        HelperUtilities.ValidateCheckNullValue(this, nameof(minimapSkullPrefab), minimapSkullPrefab);
+
     }
 
 #endif
