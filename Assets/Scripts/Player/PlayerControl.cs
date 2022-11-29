@@ -21,11 +21,14 @@ public class PlayerControl : MonoBehaviour
     private float moveSpeed;
     private float attackTimer = 0f;
     private float cooldown = 0f;
-
+    private Coroutine playerRollCoroutine;
+    private WaitForFixedUpdate waitForFixedUpdate;
+    private float playerRollCooldownTimer = 0f;
     private bool isPlayerMovementDisabled = false;
     private bool isRotaionDisabled = false;
 
     [HideInInspector] public bool isPlayerRolling = false;
+
 
     private void Awake()
     {
@@ -64,17 +67,69 @@ public class PlayerControl : MonoBehaviour
         if (isPlayerMovementDisabled)
             return;
 
+        // if player is rolling then return
+        if (isPlayerRolling) return;
+
         // Process the player movement input
         MovementInput();
 
         //player attack input
         PlayerAttackInput();
-        Debug.Log("isRotation DIsabled?" + isRotaionDisabled);
+   
         //if weapon rotation is disabled then return
         if (isRotaionDisabled) return;
         WeaponInput();
 
+        // Player roll cooldown timer
+        PlayerRollCooldownTimer();
 
+
+    }
+
+    /// <summary>
+    /// Player roll
+    /// </summary>
+    private void PlayerRoll(Vector3 direction)
+    {
+        playerRollCoroutine = StartCoroutine(PlayerRollRoutine(direction));
+    }
+
+    /// <summary>
+    /// Player roll coroutine
+    /// </summary>
+    private IEnumerator PlayerRollRoutine(Vector3 direction)
+    {
+        // minDistance used to decide when to exit coroutine loop
+        float minDistance = 0.2f;
+
+        isPlayerRolling = true;
+
+        Vector3 targetPosition = player.transform.position + (Vector3)direction * movementDetails.rollDistance;
+
+        while (Vector3.Distance(player.transform.position, targetPosition) > minDistance)
+        {
+            player.movementToPositionEvent.CallMovementToPositionEvent(targetPosition, player.transform.position, movementDetails.rollSpeed, direction, isPlayerRolling);
+
+            // yield and wait for fixed update
+            yield return waitForFixedUpdate;
+
+        }
+
+        isPlayerRolling = false;
+
+        // Set cooldown timer
+        playerRollCooldownTimer = movementDetails.rollCooldownTime;
+
+        player.transform.position = targetPosition;
+
+    }
+
+    private void PlayerRollCooldownTimer()
+    {
+        if (playerRollCooldownTimer >= 0f)
+        {
+            playerRollCooldownTimer -= Time.deltaTime;
+        }
     }
 
     //player attack input
@@ -113,7 +168,7 @@ public class PlayerControl : MonoBehaviour
         // Get movement input
         float horizontalMovement = Input.GetAxisRaw("Horizontal");
         float verticalMovement = Input.GetAxisRaw("Vertical");
-
+        bool rightMouseButtonDown = Input.GetMouseButtonDown(1);
 
         // Create a direction vector based on the input
         Vector2 direction = new Vector2(horizontalMovement, verticalMovement);
@@ -128,7 +183,17 @@ public class PlayerControl : MonoBehaviour
         if (direction != Vector2.zero)
         {
                 // trigger movement event
+            if (!rightMouseButtonDown)
+            {
+                // trigger movement event
                 player.movementByVelocityEvent.CallMovementByVelocityEvent(direction, moveSpeed);
+            }
+            // else player roll if not cooling down
+            else if (playerRollCooldownTimer <= 0f)
+            {
+                PlayerRoll((Vector3)direction);
+                transform.Find("flashEffect").GetComponent<ParticleSystem>().Play();
+            }
         }
         // else trigger idle event
         else
@@ -171,7 +236,27 @@ public class PlayerControl : MonoBehaviour
     }
 
 
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        // if collided with something stop player roll coroutine
+        StopPlayerRollRoutine();
+    }
 
+    private void OnCollisionStay2D(Collision2D collision)
+    {
+        // if in collision with something stop player roll coroutine
+        StopPlayerRollRoutine();
+    }
+
+    private void StopPlayerRollRoutine()
+    {
+        if (playerRollCoroutine != null)
+        {
+            StopCoroutine(playerRollCoroutine);
+
+            isPlayerRolling = false;
+        }
+    }
 
     /// <summary>
     /// Enable the player movement

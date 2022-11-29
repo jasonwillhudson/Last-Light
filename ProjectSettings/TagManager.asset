@@ -17,6 +17,9 @@ TagManager:
   - Enemy
   - HealthPortion
   - AttackBonus
+  - FxTemporaire
+  - Undefined
+  - weapon
   layers:
   - Default
   - TransparentFX
