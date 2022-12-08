@@ -21,6 +21,10 @@ public class Boss : MonoBehaviour
 
     public GameObject beforeSecondtAttack;
     public GameObject bullet;
+
+    public GameObject beforeThirdAttack;
+    public GameObject thirdAttack;
+
     private float cooldown = 2f;
     private float skillDuration = 2.4f;
 
@@ -54,6 +58,7 @@ public class Boss : MonoBehaviour
 
             if (currentSkill == 1) skillDuration = 2.4f;
             else if (currentSkill == 2) skillDuration = 7f;
+            else if (currentSkill == 3) skillDuration = 2.4f;
 
             isAttackgenerated = false;
             isBeforeAttackgenerated = false;
@@ -98,9 +103,26 @@ public class Boss : MonoBehaviour
                     lasbulletTime = skillDuration;
                 }
             }
-            else
+            else if(currentSkill == 3)
             {
                 //use skill three
+                //before attack
+                if (skillDuration <= 2.4f && skillDuration > 2.3f && !isBeforeAttackgenerated)
+                {
+                    var attack = Instantiate(beforeThirdAttack, transform.position, Quaternion.identity);
+                    attack.transform.parent = gameObject.transform;
+                    isBeforeAttackgenerated = true;
+                }
+
+                //skill one
+                else if (skillDuration <= 1.1f && skillDuration > 1f && !isAttackgenerated)
+                {
+                    Debug.Log("used skill three");
+                    var attack = Instantiate(thirdAttack, transform.position, Quaternion.identity);
+                    attack.transform.parent = gameObject.transform;
+                    isAttackgenerated = true;
+                    isBeforeAttackgenerated = false;
+                }
 
             }
 
