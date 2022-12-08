@@ -14552,6 +14552,7 @@ GameObject:
   - component: {fileID: 4593184484909914548}
   - component: {fileID: 3687160951367705417}
   - component: {fileID: -3125220130590390256}
+  - component: {fileID: -1387797838410446785}
   m_Layer: 0
   m_Name: topAttack
   m_TagString: Untagged
@@ -19668,6 +19669,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   requireDestroy: 0
+--- !u!114 &-1387797838410446785
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4593184484909914552}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2a24cf329ab1a22459541d08f7bf332a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &4593184484999142886
 GameObject:
   m_ObjectHideFlags: 0
