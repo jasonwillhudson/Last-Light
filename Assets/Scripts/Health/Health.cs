@@ -33,7 +33,7 @@ public class Health : MonoBehaviour
     public void gainHealth(int p)
     {
         currentHealth += p;
-        if (currentHealth > 6) currentHealth = 6;
+        if (currentHealth > 8) currentHealth = 8;
     }
 
     private void immuneCountDown()

@@ -66,7 +66,7 @@ public class GameManager : SingletonMonobehaviour<GameManager>
 
     private InstantiatedRoom bossRoom;
     private bool isFading = false;
-
+    private bool isRestart = false;
 
     protected override void Awake()
     {
@@ -89,7 +89,7 @@ public class GameManager : SingletonMonobehaviour<GameManager>
         GameObject playerGameObject = Instantiate(playerDetails.playerPrefab);
 
         // Initialize Player
-        player = playerGameObject.GetComponent<Player>();
+        player = GameObject.FindWithTag("Player").gameObject.GetComponent<Player>();
 
         player.Initialize(playerDetails);
 
@@ -107,12 +107,12 @@ public class GameManager : SingletonMonobehaviour<GameManager>
 
 
         // Subscribe to player destroyed event
-       // player.destroyedEvent.OnDestroyed += Player_OnDestroyed;
+        // player.destroyedEvent.OnDestroyed += Player_OnDestroyed;
 
 
 
     }
-    
+
     private void OnDisable()
     {
 
@@ -124,7 +124,7 @@ public class GameManager : SingletonMonobehaviour<GameManager>
         StaticEventHandler.OnRoomEnemiesDefeated -= StaticEventHandler_OnRoomEnemiesDefeated;
 
         // Unubscribe from player destroyed event
-       // player.destroyedEvent.OnDestroyed -= Player_OnDestroyed;
+        // player.destroyedEvent.OnDestroyed -= Player_OnDestroyed;
     }
 
 
@@ -160,7 +160,7 @@ public class GameManager : SingletonMonobehaviour<GameManager>
     /// <summary>
     /// Handle player destroyed event
     /// </summary>
- /*   private void Player_OnDestroyed(DestroyedEvent destroyedEvent, DestroyedEventArgs destroyedEventArgs)
+  /*  private void Player_OnDestroyed(DestroyedEvent destroyedEvent, DestroyedEventArgs destroyedEventArgs)
     {
         previousGameState = gameState;
         gameState = GameState.gameLost;
@@ -173,6 +173,18 @@ public class GameManager : SingletonMonobehaviour<GameManager>
     // Update is called once per frame
     private void Update()
     {
+
+        if (player.health.getHealth() <= 0 && !isRestart)
+        {
+            //previousGameState = gameState;
+            gameState = GameState.gameLost;
+            isRestart = true;
+        }
+        else if (player.health.getHealth() >= 0)
+        {
+            isRestart = false;
+        }
+
         HandleGameState();
 
         // For testing
@@ -180,6 +192,9 @@ public class GameManager : SingletonMonobehaviour<GameManager>
         {
             gameState = GameState.gameStarted;
         }
+
+
+
 
     }
 
@@ -228,6 +243,8 @@ public class GameManager : SingletonMonobehaviour<GameManager>
                 }
 
                 break;
+
+
 
 
             // if in the dungeon overview map handle the release of the tab key to clear the map
@@ -619,39 +636,39 @@ public class GameManager : SingletonMonobehaviour<GameManager>
     /// </summary>
     private IEnumerator GameLost()
     {
-         previousGameState = GameState.gameLost;
+        previousGameState = GameState.gameLost;
 
-          // Disable player
-          GetPlayer().playerControl.DisablePlayer();
+        // Disable player
+        GetPlayer().playerControl.DisablePlayer();
 
-          // Wait 1 seconds
-          yield return new WaitForSeconds(1f);
+        // Wait 1 seconds
+        yield return new WaitForSeconds(1f);
 
-          // Fade Out
-          yield return StartCoroutine(Fade(0f, 1f, 2f, Color.black));
+        // Fade Out
+        yield return StartCoroutine(Fade(0f, 1f, 2f, Color.black));
 
-          // Disable enemies (FindObjectsOfType is resource hungry - but ok to use in this end of game situation)
-          Enemy[] enemyArray = GameObject.FindObjectsOfType<Enemy>();
-          foreach (Enemy enemy in enemyArray)
-          {
-              enemy.gameObject.SetActive(false);
-          }
+        // Disable enemies (FindObjectsOfType is resource hungry - but ok to use in this end of game situation)
+        Enemy[] enemyArray = GameObject.FindObjectsOfType<Enemy>();
+        foreach (Enemy enemy in enemyArray)
+        {
+            enemy.gameObject.SetActive(false);
+        }
 
-          // Display game lost
-          yield return StartCoroutine(DisplayMessageRoutine("BAD LUCK " + GameResources.Instance.currentPlayer.playerName + "! YOU HAVE SUCCUMBED TO THE DUNGEON", Color.white, 2f));
+        // Display game lost
+        yield return StartCoroutine(DisplayMessageRoutine("BAD LUCK " + GameResources.Instance.currentPlayer.playerName + "! YOU HAVE SUCCUMBED TO THE DUNGEON", Color.white, 2f));
 
-          yield return StartCoroutine(DisplayMessageRoutine("COME CHALLENGE AGIAN", Color.white, 0f));
+        yield return StartCoroutine(DisplayMessageRoutine("COME CHALLENGE AGAIN", Color.white, 0f));
 
-          //yield return StartCoroutine(DisplayMessageRoutine("YOU SCORED " + gameScore.ToString("###,###0"), Color.white, 4f));
+        //yield return StartCoroutine(DisplayMessageRoutine("YOU SCORED " + gameScore.ToString("###,###0"), Color.white, 4f));
 
-          yield return StartCoroutine(DisplayMessageRoutine("PRESS RETURN TO RESTART THE GAME", Color.white, 0f));
+        yield return StartCoroutine(DisplayMessageRoutine("PRESS RETURN TO RESTART THE GAME", Color.white, 0f));
 
-          // Set game state to restart game
-          gameState = GameState.restartGame;
+        // Set game state to restart game
+        gameState = GameState.restartGame;
 
         previousGameState = GameState.gameLost;
 
-        Debug.Log("Game Lost - Bad luck!.  Game will restart in 10 seconds");
+        //Debug.Log("Game Lost - Bad luck!.  Game will restart in 10 seconds");
 
         // Wait 10 seconds
         yield return new WaitForSeconds(1f);
@@ -665,10 +682,12 @@ public class GameManager : SingletonMonobehaviour<GameManager>
     /// </summary>
     private void RestartGame()
     {
+        //gameState = GameState.gameStarted;
+
         SceneManager.LoadScene("MainMenuScene");
     }
 
-  
+
 
 
     /// <summary>

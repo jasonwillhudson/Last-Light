@@ -42,11 +42,14 @@ public class Player : MonoBehaviour
     [HideInInspector] public PlayerAttackEvent playerAttackEvent;
 
     public static Player instance;
+
     public GameObject healthDisplay;
 
     public int attackDamage = 60;
     public TMP_Text DamageDisplay;
     public GameObject gameover;
+
+
 
     private void Awake()
     {
@@ -67,13 +70,13 @@ public class Player : MonoBehaviour
 
         //set up the health
         healthDisplay = GameObject.Find("Health");
-        health.SetStartHealth(3);
+        health.SetStartHealth(4);
 
     }
 
     private void Start()
     {
-        GameObject.Find("game over").GetComponent<SpriteRenderer>().enabled = false;
+        //GameObject.Find("game over").GetComponent<SpriteRenderer>().enabled = false;
     }
 
     public void Update()
@@ -81,35 +84,50 @@ public class Player : MonoBehaviour
 
         //get the health value right now
         int healthValue = health.getHealth();
-        
+
 
         if (healthValue <= 0)
         {
+
             healthDisplay.SetActive(false);
             GameObject.Find("UI").transform.GetChild(0).gameObject.SetActive(false);
             GameObject.Find("UI Controller").transform.GetChild(0).gameObject.SetActive(false);
-            GameObject.Find("game over").GetComponent<SpriteRenderer>().enabled = true;
-            Destroy(this.gameObject);
+
+            PlayerDestroyed();
+
+            //GameObject.Find("game over").GetComponent<SpriteRenderer>().enabled = true;
+            //Destroy(this.gameObject);
         }
         else
         {
 
             //Display the health that suppose to be displayed
-            for(int i=0; i<healthValue; i++)
+            for (int i = 0; i < healthValue; i++)
             {
                 healthDisplay.transform.GetChild(i).gameObject.SetActive(true);
             }
 
             //Hide the hearts that supposed to be hide
-            for(int i=healthValue; i<6; i++)
+            for (int i = healthValue; i < 8; i++)
             {
                 healthDisplay.transform.GetChild(i).gameObject.SetActive(false);
             }
         }
 
         //change the display text
-        DamageDisplay.text  = "AD "+attackDamage; 
+        DamageDisplay.text = "AD " + attackDamage;
     }
+
+    private void PlayerDestroyed()
+    {
+        DestroyedEvent destroyedEvent = GetComponent<DestroyedEvent>();
+        destroyedEvent.CallDestroyedEvent();
+    }
+
+
+
+
+
     /// <summary>
     /// Initialize the player
     /// </summary>
@@ -117,13 +135,13 @@ public class Player : MonoBehaviour
     {
         this.playerDetail = playerDetail;
 
-  
+
     }
 
     public void InitializeHealth()
     {
         // Set player starting health
-        health.SetStartHealth(3);
+        health.SetStartHealth(4);
     }
 
 
@@ -140,7 +158,7 @@ public class Player : MonoBehaviour
     {
         GameObject obj = collision.gameObject;
 
-        if (collision.gameObject.CompareTag("HealthPortion"))
+        if (collision.gameObject.CompareTag("HealthPortion") && health.getHealth() > 0)
         {
             Destroy(collision.gameObject);
             health.gainHealth(1);
