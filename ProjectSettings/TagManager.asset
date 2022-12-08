@@ -20,6 +20,7 @@ TagManager:
   - FxTemporaire
   - Undefined
   - weapon
+  - Boss
   layers:
   - Default
   - TransparentFX

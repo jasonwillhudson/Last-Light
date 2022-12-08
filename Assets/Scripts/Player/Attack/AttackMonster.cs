@@ -26,6 +26,15 @@ public class AttackMonster : MonoBehaviour
 
         }
 
+        if (collision.gameObject.CompareTag("Boss") && attackStatus)
+        {
+            collision.gameObject.GetComponent<Boss>().health.getDamaged(player.GetComponent<Player>().attackDamage / 5);
+            collision.gameObject.GetComponent<Boss>().health.isImmune = true;
+            collision.gameObject.transform.Find("hitEffect").gameObject.GetComponent<ParticleSystem>().Play();
+            //Debug.Log("Attack Monster");
+
+        }
+
 
     }
 }
