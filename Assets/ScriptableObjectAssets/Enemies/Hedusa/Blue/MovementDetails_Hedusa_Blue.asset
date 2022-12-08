@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bdceb1ec720cb1345b1fbf536bb986a9, type: 3}
   m_Name: MovementDetails_Hedusa_Blue
   m_EditorClassIdentifier: 
-  minMoveSpeed: 4
+  minMoveSpeed: 3
   maxMoveSpeed: 6
   rollSpeed: 0
   rollDistance: 0

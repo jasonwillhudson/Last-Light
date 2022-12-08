@@ -596,6 +596,12 @@ public class GameManager : SingletonMonobehaviour<GameManager>
     {
         previousGameState = GameState.gameWon;
 
+        // Disable player
+        GetPlayer().playerControl.DisablePlayer();
+
+        // Fade Out
+        yield return StartCoroutine(Fade(0f, 1f, 2f, Color.black));
+
         // Display game won
         yield return StartCoroutine(DisplayMessageRoutine("WELL DONE " + GameResources.Instance.currentPlayer.playerName + "! YOU HAVE DEFEATED THE DUNGEON", Color.white, 3f));
 
@@ -613,7 +619,7 @@ public class GameManager : SingletonMonobehaviour<GameManager>
     /// </summary>
     private IEnumerator GameLost()
     {
-        /*  previousGameState = GameState.gameLost;
+         previousGameState = GameState.gameLost;
 
           // Disable player
           GetPlayer().playerControl.DisablePlayer();
@@ -641,7 +647,7 @@ public class GameManager : SingletonMonobehaviour<GameManager>
           yield return StartCoroutine(DisplayMessageRoutine("PRESS RETURN TO RESTART THE GAME", Color.white, 0f));
 
           // Set game state to restart game
-          gameState = GameState.restartGame;*/
+          gameState = GameState.restartGame;
 
         previousGameState = GameState.gameLost;
 

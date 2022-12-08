@@ -67,13 +67,13 @@ MonoBehaviour:
       ratio: 2
   - dungeonLevel: {fileID: 11400000, guid: 468928d8bf3446b42a7535519115c7ef, type: 2}
     spawnableObjectRatioList:
-    - dungeonObject: {fileID: 11400000, guid: 467eaed1b4035124aa546e4f4310ff9c, type: 2}
+    - dungeonObject: {fileID: 11400000, guid: 471c3acab6a4dc64580efec8d02f3210, type: 2}
       ratio: 5
-    - dungeonObject: {fileID: 11400000, guid: 06362a8d7cf0f2740b4cde6c808dbbc4, type: 2}
+    - dungeonObject: {fileID: 11400000, guid: e0d0d19a978905c418b6413c0f668f0e, type: 2}
       ratio: 5
-    - dungeonObject: {fileID: 11400000, guid: 24170f956d9324845a6dfe0232ba96c9, type: 2}
+    - dungeonObject: {fileID: 11400000, guid: 471c3acab6a4dc64580efec8d02f3210, type: 2}
       ratio: 5
-    - dungeonObject: {fileID: 11400000, guid: 034299b061bf3294e9692a3ee3dd12f9, type: 2}
+    - dungeonObject: {fileID: 11400000, guid: e0d0d19a978905c418b6413c0f668f0e, type: 2}
       ratio: 5
   - dungeonLevel: {fileID: 11400000, guid: bf3a46dfeff4b5b4db0fed40bd8b1697, type: 2}
     spawnableObjectRatioList:

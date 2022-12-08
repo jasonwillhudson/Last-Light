@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bdceb1ec720cb1345b1fbf536bb986a9, type: 3}
   m_Name: MovementDetails_Teketeke 1
   m_EditorClassIdentifier: 
-  minMoveSpeed: 4
-  maxMoveSpeed: 8
+  minMoveSpeed: 5
+  maxMoveSpeed: 12
   rollSpeed: 0
   rollDistance: 0
   rollCooldownTime: 0

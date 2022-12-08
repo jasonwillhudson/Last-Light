@@ -16,6 +16,6 @@ public class MainMenuUI : MonoBehaviour
     /// </summary>
     public void PlayGame()
     {
-        SceneManager.LoadScene("MainGameScene");
+        SceneManager.LoadScene("InstructioScene");
     }
 }
