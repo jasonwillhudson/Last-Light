@@ -15,6 +15,8 @@ MonoBehaviour:
   guid: c6f2bd6894e8ae947b8677a49ba9d8f8
   prefab: {fileID: 4327421925113694216, guid: 9fb6f8f004f241940b9e1447a0f4570a, type: 3}
   previousPrefab: {fileID: 4327421925113694216, guid: 9fb6f8f004f241940b9e1447a0f4570a, type: 3}
+  battleMusic: {fileID: 0}
+  ambientMusic: {fileID: 0}
   roomNodeType: {fileID: 11400000, guid: 2426fb8bce9f261469f382e89b638399, type: 2}
   lowerBounds: {x: -24, y: -2}
   upperBounds: {x: 34, y: 63}
@@ -58,21 +60,21 @@ MonoBehaviour:
   enemiesByLevelList:
   - dungeonLevel: {fileID: 11400000, guid: 51f0225f90b8a9d469c0167bb3a8fdc7, type: 2}
     spawnableObjectRatioList:
-    - dungeonObject: {fileID: 11400000, guid: 9f266c268698f694c979bbd635ae4d01, type: 2}
+    - dungeonObject: {fileID: 11400000, guid: a03ca633b2511a743950df375be9b3bc, type: 2}
       ratio: 1
   - dungeonLevel: {fileID: 11400000, guid: 468928d8bf3446b42a7535519115c7ef, type: 2}
     spawnableObjectRatioList:
-    - dungeonObject: {fileID: 11400000, guid: da4ce91489212444597fec0e5d2db87d, type: 2}
+    - dungeonObject: {fileID: 11400000, guid: 2a5a5a8bd7d2c054292d94dae1f1680c, type: 2}
       ratio: 1
-    - dungeonObject: {fileID: 11400000, guid: 2316100f02b8657408f3141aa77bb50e, type: 2}
+    - dungeonObject: {fileID: 11400000, guid: 2a5a5a8bd7d2c054292d94dae1f1680c, type: 2}
       ratio: 1
   - dungeonLevel: {fileID: 11400000, guid: bf3a46dfeff4b5b4db0fed40bd8b1697, type: 2}
     spawnableObjectRatioList:
-    - dungeonObject: {fileID: 11400000, guid: 9f266c268698f694c979bbd635ae4d01, type: 2}
+    - dungeonObject: {fileID: 11400000, guid: 28d6beb54c5ca09469a6e9ff0224bcba, type: 2}
       ratio: 1
-    - dungeonObject: {fileID: 11400000, guid: da4ce91489212444597fec0e5d2db87d, type: 2}
+    - dungeonObject: {fileID: 11400000, guid: 28d6beb54c5ca09469a6e9ff0224bcba, type: 2}
       ratio: 1
-    - dungeonObject: {fileID: 11400000, guid: 2316100f02b8657408f3141aa77bb50e, type: 2}
+    - dungeonObject: {fileID: 11400000, guid: 28d6beb54c5ca09469a6e9ff0224bcba, type: 2}
       ratio: 1
   roomEnemySpawnParametersList:
   - dungeonLevel: {fileID: 11400000, guid: 51f0225f90b8a9d469c0167bb3a8fdc7, type: 2}
